@@ -52,8 +52,8 @@ library Math{
     // player 1, player 2
     // return values: 
         // 0: tie
-        // 1: player 2 wins
-        // 2: player 1 wins
+        // 1: player 1 wins
+        // 2: player 2 wins
     function winner(uint8 a, uint8 b) internal pure returns (uint8) {
         require(a<=3);
         require(b<=3);
@@ -197,7 +197,7 @@ contract RPS is IRPS {
         if(_opt > 3 || hash != player.hash) {
             isFinished = true;
             winnerIndex = client;
-            balances[playerlist[winnerIndex].user] += 2*stake;
+            balances[playerlist[client].user] += 2*stake;
             emit WinnerLog(msg.sender, _opt, 255);
             return;
         }
@@ -217,11 +217,11 @@ contract RPS is IRPS {
                 balances[playerlist[client].user] += stake;
             }
             else if(win == 1) {
-                winnerIndex = client;
+                winnerIndex = host;
                 balances[playerlist[winnerIndex].user] += 2*stake;
                 isFinished = true;
             } else if(win == 2) {
-                winnerIndex = host;
+                winnerIndex = client;
                 balances[playerlist[winnerIndex].user] += 2*stake;
                 isFinished = true;
             }
