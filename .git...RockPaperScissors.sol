@@ -3,7 +3,7 @@
     1. https://www.bilibili.com/video/BV13Z4y127Ea/?spm_id_from=333.788
     2. https://www.bilibili.com/video/BV1DY411j75y/?spm_id_from=333.788&vd_source=cfe829c5f5babcd4bceee511757a067f
     3. https://coinsbench.com/solidity-smart-contract-for-rock-paper-scissors-6420f43d534d
-    4.  https://github.com/94929/rock-paper-scissors/blob/master/RockPaperScissors.sol
+    4. https://github.com/94929/rock-paper-scissors/blob/master/RockPaperScissors.sol
 */
 
 
@@ -52,8 +52,8 @@ library Math{
     // player 1, player 2
     // return values: 
         // 0: tie
-        // 1: player 1 wins
-        // 2: player 2 wins
+        // 1: player 2 wins
+        // 2: player 1 wins
     function winner(uint8 a, uint8 b) internal pure returns (uint8) {
         require(a<=3);
         require(b<=3);
@@ -197,7 +197,7 @@ contract RPS is IRPS {
         if(_opt > 3 || hash != player.hash) {
             isFinished = true;
             winnerIndex = client;
-            balances[playerlist[client].user] += 2*stake;
+            balances[playerlist[winnerIndex].user] += 2*stake;
             emit WinnerLog(msg.sender, _opt, 255);
             return;
         }
@@ -217,11 +217,11 @@ contract RPS is IRPS {
                 balances[playerlist[client].user] += stake;
             }
             else if(win == 1) {
-                winnerIndex = host;
+                winnerIndex = client;
                 balances[playerlist[winnerIndex].user] += 2*stake;
                 isFinished = true;
             } else if(win == 2) {
-                winnerIndex = client;
+                winnerIndex = host;
                 balances[playerlist[winnerIndex].user] += 2*stake;
                 isFinished = true;
             }
