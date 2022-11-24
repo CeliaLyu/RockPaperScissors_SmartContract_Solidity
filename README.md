@@ -1,4 +1,4 @@
-# RockPaperScissors
+# Rock Paper Scissors
 
 
 Aim: 
