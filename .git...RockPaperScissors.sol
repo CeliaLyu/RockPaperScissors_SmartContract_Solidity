@@ -328,10 +328,12 @@ contract RPS is IRPS {
             2: paper.
         After clicking the button "call", I can get a hash value: 
         e.g., 
-            salt: 1900; opt: 3
-            0x718a75a68e9899b5c15a1e714031c5259c4a3b46c4df393e9d78ada1ec819155
             salt: 1900; opt: 2
             0x2dffc8e4d5d05dba02da6487f03612c0c48db898bc4e7fa2be4933a034568414
+            salt: 2100; opt: 3
+            0x92933c7165b960d1e8631824ff06db646ae625fec3bea82269d84052a3853235
+            salt: 1900; opt: 3
+            0x718a75a68e9899b5c15a1e714031c5259c4a3b46c4df393e9d78ada1ec819155
     3. Copy and paste the hash value I got into the space following button "choose", and click the button "choose".
         When choosing, only if the stakes of 2 players match, the choose function can be executed.
     4. After the other player step 1-4, you click on the drop-down menu of bottun "proof", then copy and paste your choice in to "_opt", copy and paste your salt in to "_salt", 
@@ -365,6 +367,7 @@ contract RPS is IRPS {
     7. In my function "Proof", I also check if any player cheat here 
         e.g., submits choice other than 1,2,3, or submit invalid hash value which is different from what they enter into funtion "choose".
         If cheating is detected, the cheater's stake will go to the other player's balance.
-    8. I use  startBlock = block.number to prevent timeout attack, and use function refundDeposit() to refund the money to players if timeout attack is detected. 
-    9. The function "transferMoney()" can help prevent reentrancy attacks.
+    8. If there is a tie, the game will continue, until there is a winner (and loser). 
+    9. I use  startBlock = block.number to prevent timeout attack, and use function refundDeposit() to refund the money to players if timeout attack is detected. 
+    10. The function "transferMoney()" can help prevent reentrancy attacks.
 */
